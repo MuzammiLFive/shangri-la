@@ -1,0 +1,24 @@
+.canvas {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    min-height: 400px;
+}
+
+.authentication {
+    height: 300px;
+    padding: 10px;
+}
+
+button {
+    width: 200px;
+    height: 30px;
+    background: aliceblue;
+    border: 1px solid darkblue;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.selected {
+    background-color: #bdc1c9;
+}

@@ -1,0 +1,18 @@
+.login {
+    padding-top: 20px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 5px;
+}
+
+.cell {
+    display: flex;
+    justify-content: space-between;
+    grid-gap: 5px;
+}
+
+.error {
+    color: orangered;
+    font-size: 15px;
+}
