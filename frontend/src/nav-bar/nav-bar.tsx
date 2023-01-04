@@ -19,7 +19,6 @@ export class NavBar extends React.Component<NavProps, NavProps> {
     }
 
     render() {
-        console.log(this.state.role);
         return (
             <div className="header">
                 <div>iGSE</div>

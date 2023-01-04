@@ -1,16 +1,10 @@
 import React from "react";
 import './login.css';
-import {post} from "../common/http";
+import {preloginPost} from "../common/http";
 
 interface loginState {
     emailError?: string;
     passwordError?: string;
-}
-
-interface resp {
-    status: string;
-    ok: string;
-    json: string;
 }
 
 interface loginResponse {
@@ -40,7 +34,7 @@ export class Login extends React.Component<any, loginState> {
             return;
         }
 
-        post("/api/login", {"email": email, "password": password})
+        preloginPost("/api/login", {"email": email, "password": password})
             .then(response => {
                 if (!response?.ok) {
                     alert("Login error");
