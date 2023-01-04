@@ -10,8 +10,8 @@ import jakarta.persistence.Table
 class Voucher(
     @Id
     @Column(name = "EVC_code")
-    val evcCode: String,
+    var evcCode: String,
 
     @Column(name = "used")
-    val used: Int
+    var used: Int
 )

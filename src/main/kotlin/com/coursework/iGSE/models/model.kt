@@ -21,3 +21,8 @@ data class LoginResponse(
     val role: String,
     val token: String
 )
+
+data class UserInfo(
+    val customerId: String,
+    val role: String
+)

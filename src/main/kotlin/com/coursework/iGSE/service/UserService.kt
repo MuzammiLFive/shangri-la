@@ -13,16 +13,13 @@ class UserService(private val userRepository: UserRepository) {
         return userRepository.findByCustomerId(username)
     }
 
+    fun addTopup(customerId: String) {
+        val user = userRepository.findByCustomerId(customerId)!!
+        user.balance += 200
+        userRepository.save(user)
+    }
+
     fun save(user: Customer): Customer {
         return userRepository.save(user);
     }
-
-//    fun loginUser(request: LoginRequest, user: CustomerEntity): LoginResponse {
-//        val userPass = getSHA256(request.password);
-//        if (userPass != user.passwordHash) {
-//            throw UsernameNotFoundException("You have entered an invalid username or password")
-//        } else {
-//
-//        }
-//    }
 }
