@@ -25,8 +25,8 @@ class CustomerController(
         try {
             jwtUtils.verify(authToken)
 
-            val res = readingService.getReadingByCustomerId(customerId) ?: return ResponseEntity.status(404)
-                .body(Message("No such record"))
+            val res = readingService.getReadingByCustomerId(customerId) ?: return ResponseEntity.ok()
+                .body(Message("No record"))
             return ResponseEntity.ok().body(res)
         } catch (e: Exception) {
             return ResponseEntity.badRequest().body(Message(e.toString()))

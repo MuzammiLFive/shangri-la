@@ -26,3 +26,14 @@ data class UserInfo(
     val customerId: String,
     val role: String
 )
+
+data class TaiffUpdate(
+    val electricityDay: Float?,
+    val electricityNight: Float?,
+    val gas: Float?
+)
+
+data class Stats(
+    val electricityAvg: Double,
+    val gasAvg: Double
+)

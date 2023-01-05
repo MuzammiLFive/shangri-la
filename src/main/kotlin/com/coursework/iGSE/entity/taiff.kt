@@ -13,5 +13,5 @@ class Taiff(
     val taiffType: String,
 
     @Column(name = "rate")
-    val rate: Float
+    var rate: Float
 )
