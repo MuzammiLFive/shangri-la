@@ -8,6 +8,11 @@
     color: white;
 }
 
+.logo {
+    padding-top: 3px;
+    padding-left: 10px;
+}
+
 .logout {
     margin: 5px;
     cursor: pointer;

@@ -21,7 +21,7 @@ export class NavBar extends React.Component<NavProps, NavProps> {
     render() {
         return (
             <div className="header">
-                <div>iGSE</div>
+                <div className="logo">iGSE</div>
                 {!!this.state.role ?
                     <button className="logout" onClick={this.logout}>Log out</button>
                     : ""}
