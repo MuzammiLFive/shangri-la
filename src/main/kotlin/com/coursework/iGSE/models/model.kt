@@ -9,7 +9,7 @@ data class RegisterRequest(
     val address: String,
     val propertyType: PropertyType,
     val bedroomNum: Int,
-    val voucher: String?
+    val voucher: String
 )
 
 data class LoginRequest(
