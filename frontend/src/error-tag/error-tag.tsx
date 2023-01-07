@@ -16,6 +16,6 @@ export class ErrorTag extends React.Component<ErrorProps, ErrorProps> {
 
     render() {
         const error = this.state.error;
-        return ( error ? <span>{this.state.error}</span> : "" )
+        return ( error ? <div className="error">{this.state.error}</div> : "" )
     }
 }

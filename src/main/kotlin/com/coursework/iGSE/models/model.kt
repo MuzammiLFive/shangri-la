@@ -4,7 +4,8 @@ import com.coursework.iGSE.entity.PropertyType
 
 data class RegisterRequest(
     val email: String,
-    val password: String,
+    val password1: String,
+    val password2: String,
     val address: String,
     val propertyType: PropertyType,
     val bedroomNum: Int,

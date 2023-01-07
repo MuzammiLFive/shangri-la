@@ -50,23 +50,23 @@ export class Login extends React.Component<any, loginState> {
         });
     }
 
-    toggleError(hidden: boolean) {
+    toggleError() {
         this.setState({error: undefined});
     }
 
     render() {
         return (
             <div className="login">
-                <div className="error">
-                    {!!this.state.error ? <ErrorTag id="1" error={this.state.error}/> : ""}
-                </div>
+                {!!this.state.error ? <ErrorTag id="1" error={this.state.error}/> : ""}
                 <div className="cell">
-                    <div>Email: </div><div><input id="email" type="email" required onClick={() => this.toggleError(true)}/>
+                    <div>Email:</div>
+                    <div><input id="email" type="email" required onClick={() => this.toggleError()}/>
                     </div>
                 </div>
                 <div className="cell">
-                    <div>Password: </div><div><input id="password" type="password" required
-                                          onClick={() => this.toggleError(true)}/></div>
+                    <div>Password:</div>
+                    <div><input id="password" type="password" required
+                                onClick={() => this.toggleError()}/></div>
                 </div>
                 <div className="submit">
                     <input type="submit" value="Log in" onClick={() => this.login()}/>

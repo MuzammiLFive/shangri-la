@@ -1,5 +1,5 @@
 .registration {
-    padding-top: 20px;
+    padding-top: 40px;
     display: grid;
     align-items: center;
     justify-content: center;
@@ -7,6 +7,24 @@
 }
 
 .cell {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+select {
+    height: 25px;
+    width: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    width: -webkit-fill-available;
+    appearance: textfield;
+    margin: 0;
 }
