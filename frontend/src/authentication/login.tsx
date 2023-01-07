@@ -1,10 +1,10 @@
 import React from "react";
 import './login.css';
 import {preloginPost} from "../common/http";
+import {ErrorTag} from "../error-tag/error-tag";
 
 interface loginState {
-    emailError?: string;
-    passwordError?: string;
+    error?: string;
 }
 
 interface loginResponse {
@@ -17,28 +17,27 @@ export class Login extends React.Component<any, loginState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            emailError: "",
-            passwordError: ""
+            error: undefined
         }
     }
 
     login() {
         const email = (document.getElementById("email") as HTMLInputElement).value;
         if (email === "") {
-            alert("Email cannot be empty");
+            this.setState({error: "Email cannot be empty"});
             return;
         }
         const password = (document.getElementById("password") as HTMLInputElement).value;
         if (password === "") {
-            alert("password cannot be empty");
+            this.setState({error: "password cannot be empty"});
             return;
         }
 
         preloginPost("/api/login", {"email": email, "password": password})
             .then(response => {
                 if (!response?.ok) {
-                    alert("Login error");
-                    throw new Error("Login error");
+                    this.setState({error: "Email or password invalid"})
+                    throw new Error("Email or password invalid");
                 }
                 return response?.json() as unknown as loginResponse
             }).then(json => {
@@ -52,26 +51,25 @@ export class Login extends React.Component<any, loginState> {
     }
 
     toggleError(hidden: boolean) {
-        const element = document.getElementById("error") as HTMLDivElement;
-        element.hidden = hidden;
+        this.setState({error: undefined});
     }
 
     render() {
         return (
             <div className="login">
+                <div className="error">
+                    {!!this.state.error ? <ErrorTag id="1" error={this.state.error}/> : ""}
+                </div>
                 <div className="cell">
-                    <div>Email id: <input id="email" type="email" required onClick={() => this.toggleError(true)}/>
+                    <div>Email: </div><div><input id="email" type="email" required onClick={() => this.toggleError(true)}/>
                     </div>
                 </div>
                 <div className="cell">
-                    <div>Password: <input id="password" type="password" required
+                    <div>Password: </div><div><input id="password" type="password" required
                                           onClick={() => this.toggleError(true)}/></div>
                 </div>
-                <div id="error" hidden>
-                    Invalid username or password
-                </div>
-                <div className="cell">
-                    <div><input type="submit" value="Log in" onClick={() => this.login()}/></div>
+                <div className="submit">
+                    <input type="submit" value="Log in" onClick={() => this.login()}/>
                 </div>
             </div>
         );
