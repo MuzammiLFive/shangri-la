@@ -49,6 +49,7 @@ class AuthController(
             Role.customer.name
         )
         val newUser = userService.save(user)
+        voucherService.useVoucher(request.voucher)
 
         return ResponseEntity.ok(newUser)
     }

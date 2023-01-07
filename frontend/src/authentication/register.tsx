@@ -4,14 +4,14 @@ import './register.css';
 import {preloginPost} from "../common/http";
 
 const PropertyTypes = [
-    "Detached",
-    "Semi Detached",
-    "Terraced",
-    "Flat",
-    "Cottage",
-    "Bungalow",
-    "Mansion"
-]
+    "detached",
+    "semi-detached",
+    "terraced",
+    "flat",
+    "cottage",
+    "bungalow",
+    "mansion"
+];
 
 interface RProps {
     emailError?: string;
@@ -79,18 +79,28 @@ export class Register extends React.Component<any, RProps> {
             this.setState({voucherError: "Invalid voucher"});
             return;
         }
-        preloginPost("/api/login", {
-            "email": email, "password": pass1
+
+        preloginPost("/api/register", {
+            "email": email,
+            "password1": pass1,
+            "password2": pass2,
+            "address": address,
+            "propertyType": property,
+            "bedroomNum": bedroomNum,
+            "voucher": voucher
         }).then(response => {
-            if (!response?.ok) {
-                alert("Email or password invalid")
-                throw new Error("Email or password invalid");
+            if (response?.ok) {
+                alert("Registered!");
+                window.location.reload();
             }
-            return;
+            return response?.json();
         }).then(json => {
-            console.log(json);
+            const message = json["message"];
+            if (message)
+                this.setState({responseError: message})
         }).catch(error => {
             console.log(error);
+            alert(error);
         });
     }
 
@@ -109,20 +119,20 @@ export class Register extends React.Component<any, RProps> {
     render() {
         return (
             <div className="registration">
-                <ErrorTag id="responseError" error={this.state.responseError}/>
+                {!!this.state.responseError ? <ErrorTag id="responseError" error={this.state.responseError}/> : ""}
                 <div className="cell">
                     <div>Email id:</div>
-                    <div><input id="email" type="email" required/></div>
+                    <div><input id="email" type="email" onClick={() => this.reset()}/></div>
                 </div>
                 {!!this.state.emailError ? <ErrorTag id="usernameError" error={this.state.emailError}/> : ""}
                 <div className="cell">
                     <div>Password:</div>
-                    <div><input id="password1" type="password" required
+                    <div><input id="password1" type="password"
                                 onClick={() => this.reset()}/></div>
                 </div>
                 <div className="cell">
                     <div>Confirm Password:</div>
-                    <div><input id="password2" type="password" required
+                    <div><input id="password2" type="password"
                                 onClick={() => this.reset()}/></div>
                 </div>
                 {!!this.state.passwordError ? <ErrorTag id="passwordError" error={this.state.passwordError}/> : ""}
@@ -134,7 +144,7 @@ export class Register extends React.Component<any, RProps> {
                 <div className="cell">
                     <div>Property Type:</div>
                     <div>
-                        <select id="propertyType" required onClick={() => this.reset()}>
+                        <select id="propertyType" onClick={() => this.reset()}>
                             <option value="">Select type</option>
                             {PropertyTypes.map(property => <option value={property}>{property}</option>)}
                         </select>
@@ -144,7 +154,7 @@ export class Register extends React.Component<any, RProps> {
                     <ErrorTag id="propertyError" error={this.state.propertyTypeError}/> : ""}
                 <div className="cell">
                     <div>Number of Bedrooms:</div>
-                    <div><input id="bedroomNum" type="number" min="0" max="7" required onClick={() => this.reset()}/>
+                    <div><input id="bedroomNum" type="number" min="0" max="7" onClick={() => this.reset()}/>
                     </div>
                 </div>
                 {!!this.state.bedroomNumError ? <ErrorTag id="bedroomError" error={this.state.bedroomNumError}/> : ""}
