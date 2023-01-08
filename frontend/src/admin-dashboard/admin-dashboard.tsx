@@ -1,8 +1,8 @@
 import React from "react";
 import "./admin-dashboard.css";
 import {TaiffUpdate} from "./taiff-update";
-import {Statistics} from "./statistics";
-import {Readings} from "./readings";
+import {Statistics} from "./statistics/statistics";
+import {Readings} from "./readings/readings";
 
 enum Sidebar {
     taiff,

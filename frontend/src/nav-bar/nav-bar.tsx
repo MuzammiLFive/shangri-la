@@ -22,6 +22,7 @@ export class NavBar extends React.Component<NavProps, NavProps> {
         return (
             <div className="header">
                 <div className="logo">iGSE</div>
+                {this.state.role === "admin" ? <div className="banner">ADMIN DASHBOARD</div> : ""}
                 {!!this.state.role ?
                     <button className="logout" onClick={this.logout}>Log out</button>
                     : ""}
