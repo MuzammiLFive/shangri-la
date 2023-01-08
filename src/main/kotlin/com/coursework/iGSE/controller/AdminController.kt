@@ -34,6 +34,13 @@ class AdminController(
         }
     }
 
+    @GetMapping("/get-taiff")
+    fun getTaiff(
+        @RequestHeader(value = "authorization", defaultValue = "") authToken: String,
+    ): ResponseEntity<Any> {
+        return ResponseEntity.ok().body(taiffService.getTaiff())
+    }
+
     @PostMapping("/update-taiff")
     fun updateTaiff(
         @RequestHeader(value = "authorization", defaultValue = "") authToken: String,

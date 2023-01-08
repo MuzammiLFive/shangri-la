@@ -1,6 +1,6 @@
 import React from "react";
 import "./admin-dashboard.css";
-import {TaiffUpdate} from "./taiff-update";
+import {TaiffUpdate} from "./taiff-update/taiff-update";
 import {Statistics} from "./statistics/statistics";
 import {Readings} from "./readings/readings";
 

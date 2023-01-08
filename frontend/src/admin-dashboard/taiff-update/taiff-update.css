@@ -1,0 +1,22 @@
+.taiff {
+    padding-top: 20px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.sub {
+    border-bottom: 1px solid grey;
+    padding-bottom: 5px;
+}
+
+.row>div {
+    padding-top: 10px;
+}
+
+input[type=number] {
+    height: 20px;
+}
