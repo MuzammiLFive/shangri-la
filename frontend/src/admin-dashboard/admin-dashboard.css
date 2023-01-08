@@ -6,15 +6,15 @@
     position: fixed;
     height: 100%;
     overflow: auto;
-}
-
-.admin-header {
-    padding-top: 20px;
+    border-right: 2px solid grey;
 }
 
 .sub {
     border-bottom: 1px solid grey;
-    padding-bottom: 5px;
+    padding: 11px;
+    font-family: Cambria;
+    font-weight: bold;
+    font-size: large;
 }
 
 /* Sidebar links */
@@ -29,15 +29,14 @@
 
 /* Active/current link */
 .sidebar button.active {
-    background-color: #04AA6D;
+    background-color: #555;
     color: white;
     cursor: pointer;
 }
 
 /* Links on mouse-over */
 .sidebar button:hover:not(.active) {
-    background-color: #555;
-    color: white;
+    color: blue;
     cursor: pointer;
 }
 
@@ -45,5 +44,4 @@
 div.content {
     margin-left: 200px;
     padding: 1px 16px;
-    height: 1000px;
 }

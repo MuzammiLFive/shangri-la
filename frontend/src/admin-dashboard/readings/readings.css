@@ -1,0 +1,10 @@
+.reading-header {
+    padding: 5px;
+    font-weight: bold;
+    border-bottom: 1px solid grey;
+}
+
+.reading-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}

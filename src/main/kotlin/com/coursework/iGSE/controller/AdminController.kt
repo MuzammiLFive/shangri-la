@@ -38,7 +38,16 @@ class AdminController(
     fun getTaiff(
         @RequestHeader(value = "authorization", defaultValue = "") authToken: String,
     ): ResponseEntity<Any> {
-        return ResponseEntity.ok().body(taiffService.getTaiff())
+        try {
+            jwtUtils.verify(authToken)
+            val res = jwtUtils.getUserInfo(authToken)
+            if (res.role != Role.admin.name) {
+                return ResponseEntity.status(403).body(Message("Unauthorized Access"))
+            }
+            return ResponseEntity.ok().body(taiffService.getTaiff())
+        } catch (e: Exception) {
+            return ResponseEntity.badRequest().body(Message(e.toString()))
+        }
     }
 
     @PostMapping("/update-taiff")
