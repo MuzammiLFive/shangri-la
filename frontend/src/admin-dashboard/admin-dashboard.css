@@ -8,6 +8,15 @@
     overflow: auto;
 }
 
+.admin-header {
+    padding-top: 20px;
+}
+
+.sub {
+    border-bottom: 1px solid grey;
+    padding-bottom: 5px;
+}
+
 /* Sidebar links */
 .sidebar button {
     display: block;

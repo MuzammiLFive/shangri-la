@@ -4,7 +4,9 @@ export class Statistics extends React.Component<any, any> {
 
     render() {
         return (
-            <div>Statistics</div>
+            <div className="admin-header">
+                <div className="sub">Statistics</div>
+            </div>
         )
     }
 }

@@ -1,10 +1,27 @@
 import React from "react";
 
-export class Readings extends React.Component<any, any> {
+interface readingsProps {
+
+}
+
+export class Readings extends React.Component<any, readingsProps> {
+    constructor(props: any) {
+        super(props);
+    }
+
+    componentDidMount() {
+
+    }
+
+    getReadings() {
+
+    }
 
     render() {
         return (
-            <div>Statistics!!</div>
+            <div className="admin-header">
+                <div className="sub">Readings</div>
+            </div>
         )
     }
 }

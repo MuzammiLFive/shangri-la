@@ -57,7 +57,7 @@ export class TaiffUpdate extends React.Component<any, Tprops> {
 
     render() {
         return (
-            <div className="taiff">
+            <div className="admin-header">
                 <div className="sub">Taiff Rates:</div>
                 <div className="row heading">
                     <div>Electricity Day</div>
@@ -75,9 +75,11 @@ export class TaiffUpdate extends React.Component<any, Tprops> {
                                 onChange={() => this.updateVals()}/></div>
                 </div>
                 <div className="row">
+                    <div></div>
                     <div>
                         <button onClick={() => this.updateTaiff()}>Update</button>
                     </div>
+                    <div></div>
                 </div>
             </div>
         )
