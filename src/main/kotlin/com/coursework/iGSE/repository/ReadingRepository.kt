@@ -12,6 +12,8 @@ interface ReadingRepository: JpaRepository<Reading, Long> {
     @Query("SELECT * FROM Reading", nativeQuery = true)
     fun getAllReadings(): List<Reading>
 
+    fun getAllByCustomerId(id: String): List<Reading>
+
     @Query("SELECT DISTINCT(customer_id) from reading", nativeQuery = true)
     fun getDistinctCustomers(): List<String>
 }
