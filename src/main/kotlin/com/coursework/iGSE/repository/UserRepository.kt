@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface UserRepository: JpaRepository<Customer, Long> {
     fun findByCustomerId(id: String): Customer?
+
+    fun findAllByPropertyType(type: String): List<Customer?>
 }
