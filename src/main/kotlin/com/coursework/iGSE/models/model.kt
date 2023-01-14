@@ -2,6 +2,8 @@ package com.coursework.iGSE.models
 
 import com.coursework.iGSE.entity.Customer
 import com.coursework.iGSE.entity.PropertyType
+import com.coursework.iGSE.entity.Reading
+import java.util.Date
 
 data class RegisterRequest(
     val email: String,
@@ -48,6 +50,25 @@ data class Stats(
     val electricityAvg: Double,
     val gasAvg: Double
 )
+
+data class NewReading(
+    val date: Date,
+    val electricityDay: Float,
+    val electricityNight: Float,
+    val gas: Float
+)
+
+fun NewReading.toReading(id: String): Reading {
+    return Reading(
+        readingId = 1,
+        customerId = id,
+        submissionDate = this.date,
+        elecReadingDay = this.electricityDay,
+        elecReadingNight = this.electricityNight,
+        gasReading = this.gas,
+        status = "pending"
+    )
+}
 
 fun Customer.toCustomerDetails(): UserDetails {
     return UserDetails(

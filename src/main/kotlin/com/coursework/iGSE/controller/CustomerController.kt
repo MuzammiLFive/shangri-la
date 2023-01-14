@@ -1,6 +1,7 @@
 package com.coursework.iGSE.controller
 
 import com.coursework.iGSE.models.Message
+import com.coursework.iGSE.models.NewReading
 import com.coursework.iGSE.models.toCustomerDetails
 import com.coursework.iGSE.service.ReadingService
 import com.coursework.iGSE.service.UserService
@@ -29,6 +30,22 @@ class CustomerController(
             val res = userService.loadUserByUsername(userInfo.customerId) ?: return ResponseEntity.ok()
                 .body(Message("No record"))
             return ResponseEntity.ok().body(res.toCustomerDetails())
+        } catch (e: Exception) {
+            return ResponseEntity.badRequest().body(Message(e.toString()))
+        }
+    }
+
+    @PostMapping("/submit-reading")
+    fun submitReading(
+        @RequestHeader(value = "authorization", defaultValue = "") authToken: String,
+        @RequestBody newReading: NewReading
+    ): ResponseEntity<Any> {
+        try {
+            jwtUtils.verify(authToken)
+            val userInfo = jwtUtils.getUserInfo(authToken)
+
+            val res = readingService.submitReading(userInfo.customerId, newReading)
+            return ResponseEntity.ok().body(res)
         } catch (e: Exception) {
             return ResponseEntity.badRequest().body(Message(e.toString()))
         }

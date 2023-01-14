@@ -17,7 +17,7 @@ class JwtUtils {
             .claim("customerId", user.customerId)
             .claim("role", user.type)
             .setExpiration(expiryDuration)
-            .signWith(SignatureAlgorithm.HS512, secret).compact()
+            .signWith(SignatureAlgorithm.HS256, secret).compact()
     }
 
     fun verify(token: String) {
