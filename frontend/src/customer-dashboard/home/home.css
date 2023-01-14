@@ -1,0 +1,11 @@
+.myInfo {
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.userInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 50%;
+}

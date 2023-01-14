@@ -1,5 +1,6 @@
 package com.coursework.iGSE.models
 
+import com.coursework.iGSE.entity.Customer
 import com.coursework.iGSE.entity.PropertyType
 
 data class RegisterRequest(
@@ -28,6 +29,15 @@ data class UserInfo(
     val role: String
 )
 
+data class UserDetails(
+    val customerId: String,
+    val role: String,
+    val address: String,
+    val propertyType: String,
+    val bedroomNum: Int,
+    val balance: Double
+)
+
 data class TaiffUpdate(
     val electricityDay: Float?,
     val electricityNight: Float?,
@@ -38,3 +48,14 @@ data class Stats(
     val electricityAvg: Double,
     val gasAvg: Double
 )
+
+fun Customer.toCustomerDetails(): UserDetails {
+    return UserDetails(
+        customerId = this.customerId,
+        role = this.type,
+        address = this.address,
+        propertyType = this.propertyType,
+        bedroomNum = this.bedroomNum,
+        balance = this.balance
+    )
+}
