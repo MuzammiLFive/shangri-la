@@ -1,8 +1,10 @@
 import React from "react";
 import {SubmitReading} from "./submit-reading/submit-reading";
 import {PayBill} from "./pay-bill/pay-bill";
+import {Home} from "./home/home";
 
 enum Sidebar {
+    home,
     submitReading,
     payBill
 }
@@ -15,12 +17,14 @@ export class CustomerDashboard extends React.Component<any, Sprops> {
     constructor(props: any) {
         super(props);
         this.state = {
-            selection: Sidebar.submitReading
+            selection: Sidebar.home
         }
     }
 
     getSelectedContent() {
         switch (this.state.selection) {
+            case Sidebar.home:
+                return <Home/>
             case Sidebar.submitReading:
                 return <SubmitReading/>
             case Sidebar.payBill:
@@ -44,6 +48,9 @@ export class CustomerDashboard extends React.Component<any, Sprops> {
         return (
             <div className="main">
                 <div className="sidebar">
+                    <button className={this.isActive(Sidebar.home)}
+                            onClick={() => this.setSelection(Sidebar.home)}>Home
+                    </button>
                     <button className={this.isActive(Sidebar.submitReading)}
                             onClick={() => this.setSelection(Sidebar.submitReading)}>Submit Reading
                     </button>
