@@ -1,6 +1,7 @@
 package com.coursework.iGSE.service
 
 import com.coursework.iGSE.entity.Reading
+import com.coursework.iGSE.models.Bill
 import com.coursework.iGSE.models.NewReading
 import com.coursework.iGSE.models.Stats
 import com.coursework.iGSE.models.toReading
@@ -11,7 +12,8 @@ import java.util.*
 
 @Service
 class ReadingService(
-    private val readingRepository: ReadingRepository
+    private val readingRepository: ReadingRepository,
+    private val taiffService: TaiffService
 ) {
     fun getReadingByCustomerId(customerId: String): Reading? {
         return readingRepository.getReadingByCustomerId(customerId)
@@ -34,6 +36,25 @@ class ReadingService(
             readingRepository.save(pendingBill)
         } else {
             readingRepository.save(reading.toReading(id))
+        }
+    }
+
+    fun getRecentBill(id: String): Bill? {
+        val lastPaid = readingRepository.getLastBillByCustomerId(id, "paid")
+        val lastPending = readingRepository.getLastBillByCustomerId(id, "pending")
+        return if (lastPending == null) {
+            null
+        } else {
+            val taiff = taiffService.getTaiff()
+            val elecDayUse = lastPending.elecReadingDay - (lastPaid?.elecReadingDay ?: 0F)
+            val elecNightUse = lastPending.elecReadingNight - (lastPaid?.elecReadingNight ?: 0F)
+            val gasUse = lastPending.gasReading - (lastPaid?.gasReading ?: 0F)
+            Bill(
+                elecDayUse,
+                elecNightUse,
+                gasUse,
+                (elecDayUse * taiff.electricityDay!! + elecNightUse * taiff.electricityNight!! + gasUse * taiff.gas!!)
+            )
         }
     }
 

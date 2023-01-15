@@ -51,6 +51,25 @@ class CustomerController(
         }
     }
 
+    @GetMapping("/get-bill")
+    fun getBill(
+        @RequestHeader(value = "authorization", defaultValue = "") authToken: String,
+    ): ResponseEntity<Any> {
+        try {
+            jwtUtils.verify(authToken)
+            val userInfo = jwtUtils.getUserInfo(authToken)
+
+            val bill = readingService.getRecentBill(userInfo.customerId)
+            return if (bill == null) {
+                ResponseEntity.status(404).body(Message("No pending bill."))
+            } else {
+                ResponseEntity.ok().body(bill)
+            }
+        } catch (e: Exception) {
+            return ResponseEntity.badRequest().body(Message(e.toString()))
+        }
+    }
+
     @GetMapping("/reading/{customerId}")
     fun getReading(
         @RequestHeader(value = "authorization", defaultValue = "") authToken: String,

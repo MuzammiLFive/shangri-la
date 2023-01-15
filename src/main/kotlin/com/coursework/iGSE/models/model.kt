@@ -58,6 +58,13 @@ data class NewReading(
     val gas: Float
 )
 
+data class Bill(
+    val electricityDayUsage: Float,
+    val electricityNightUsage: Float,
+    val gasUsage: Float,
+    val total: Float
+)
+
 fun NewReading.toReading(id: String): Reading {
     return Reading(
         customerId = id,
