@@ -1,3 +1,8 @@
+.sub2 {
+    text-align: left;
+    font-style: oblique;
+}
+
 .myInfo {
     text-align: left;
     font-size: 20px;
@@ -7,5 +12,7 @@
 .userInfo {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-row-gap: 10px;
     width: 50%;
+    padding-top: 30px;
 }

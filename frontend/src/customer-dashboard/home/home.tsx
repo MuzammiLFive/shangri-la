@@ -38,8 +38,7 @@ export class Home extends React.Component<any, UProps> {
         const user = sessionStorage.getItem("user");
         return (
             <div>
-                <div className="sub">Welcome {user} !</div>
-                <div className="myInfo">My Info:</div>
+                <div className="sub sub2">Welcome {user} !</div>
                 {this.state?.customerDetails ?
                     <div className="userInfo">
                         <div>Email:</div>
