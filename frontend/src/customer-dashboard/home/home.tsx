@@ -2,7 +2,7 @@ import React from "react";
 import {get} from "../../common/http";
 import "./home.css";
 
-interface CustomerDetails {
+export interface CustomerDetails {
     customerId: string;
     role: string;
     address: string;

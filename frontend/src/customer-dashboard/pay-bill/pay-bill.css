@@ -15,3 +15,73 @@
     border: 1px solid grey;
     min-height: 200px;
 }
+
+.pay {
+    padding-top: 30px;
+    display: grid;
+    grid-gap: 40px;
+    height: fit-content;
+    margin: 20px;
+}
+
+.noPayment {
+    padding: 30px;
+    color: #0400ff;
+    font-size: 20px;
+}
+
+.payButton {
+}
+
+.topup {
+    padding-top: 30px;
+    display: grid;
+    grid-gap: 40px;
+}
+
+.topup input[type=text] {
+    width: 80px;
+    height: 20px;
+    padding: 2px;
+    margin-right: 10px;
+}
+
+.topupButton {
+
+}
+
+.checkmark {
+    display:inline-block;
+    height:22px;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+    transform: rotate(45deg);
+}
+
+.checkmark_circle {
+    position: absolute;
+    width:22px;
+    height:22px;
+    background-color: green;
+    border-radius:11px;
+    left:0;
+    top:0;
+}
+
+.checkmark_stem {
+    position: absolute;
+    width:3px;
+    height:9px;
+    background-color:#fff;
+    left:11px;
+    top:6px;
+}
+
+.checkmark_kick {
+    position: absolute;
+    width:3px;
+    height:3px;
+    background-color:#fff;
+    left:8px;
+    top:12px;
+}

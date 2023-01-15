@@ -1,11 +1,10 @@
 package com.coursework.iGSE.service
 
 import com.coursework.iGSE.entity.Reading
-import com.coursework.iGSE.models.Bill
-import com.coursework.iGSE.models.NewReading
-import com.coursework.iGSE.models.Stats
-import com.coursework.iGSE.models.toReading
+import com.coursework.iGSE.models.*
 import com.coursework.iGSE.repository.ReadingRepository
+import org.apache.coyote.Response
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import java.time.ZonedDateTime
 import java.util.*
@@ -13,7 +12,8 @@ import java.util.*
 @Service
 class ReadingService(
     private val readingRepository: ReadingRepository,
-    private val taiffService: TaiffService
+    private val taiffService: TaiffService,
+    private val userService: UserService
 ) {
     fun getReadingByCustomerId(customerId: String): Reading? {
         return readingRepository.getReadingByCustomerId(customerId)
@@ -56,6 +56,19 @@ class ReadingService(
                 (elecDayUse * taiff.electricityDay!! + elecNightUse * taiff.electricityNight!! + gasUse * taiff.gas!!)
             )
         }
+    }
+
+    fun payBill(id: String): ResponseEntity<Any> {
+        val record = readingRepository.getLastBillByCustomerId(id, "pending")
+        val bill = this.getRecentBill(id)
+        if (record == null || bill == null) {
+            return ResponseEntity.badRequest().body(Message("No pending bill."))
+        }
+        record.status = "paid"
+        readingRepository.save(record)
+        userService.reduceBalance(id, bill.total)
+
+        return ResponseEntity.ok().body(Message("Payment Complete"))
     }
 
     fun statistics(): Stats {

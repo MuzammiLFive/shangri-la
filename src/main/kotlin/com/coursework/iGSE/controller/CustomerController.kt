@@ -70,6 +70,20 @@ class CustomerController(
         }
     }
 
+    @PostMapping("/pay-bill")
+    fun payBill(
+        @RequestHeader(value = "authorization", defaultValue = "") authToken: String,
+    ): ResponseEntity<Any> {
+        try {
+            jwtUtils.verify(authToken)
+            val userInfo = jwtUtils.getUserInfo(authToken)
+
+            return readingService.payBill(userInfo.customerId)
+        } catch (e: Exception) {
+            return ResponseEntity.badRequest().body(Message(e.toString()))
+        }
+    }
+
     @GetMapping("/reading/{customerId}")
     fun getReading(
         @RequestHeader(value = "authorization", defaultValue = "") authToken: String,

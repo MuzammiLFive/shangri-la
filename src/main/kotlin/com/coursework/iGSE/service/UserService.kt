@@ -19,6 +19,12 @@ class UserService(private val userRepository: UserRepository) {
         userRepository.save(user)
     }
 
+    fun reduceBalance(customerId: String, amount: Float) {
+        val user = userRepository.findByCustomerId(customerId)!!
+        user.balance = user.balance - amount
+        userRepository.save(user)
+    }
+
     fun save(user: Customer): Customer {
         return userRepository.save(user);
     }
