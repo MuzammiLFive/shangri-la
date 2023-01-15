@@ -9,7 +9,7 @@ import java.util.*
 @Component(value = "JwtComponent")
 class JwtUtils {
     private val secret = "secret"
-    private val expiryDuration = Date(System.currentTimeMillis() + 60 * 24 * 1000)
+    private val expiryDuration = Date(System.currentTimeMillis() + 60 * 24 * 10000)
 
     fun generateJWT(user: Customer): String {
         return Jwts.builder()

@@ -24,16 +24,15 @@ class ReadingService(
     fun submitReading(id: String, reading: NewReading) {
         if (reading.date > Date.from(ZonedDateTime.now().toInstant())) {
             throw Error("Invalid Date")
-            return
         }
-        val lastBill = readingRepository.getLastBillByCustomerId(id, "paid")
-        if (lastBill == null) { // first time paying
-            readingRepository.save(reading.toReading(id))
+        val pendingBill = readingRepository.getLastBillByCustomerId(id, "pending")
+        if (pendingBill != null) {
+            pendingBill.submissionDate = reading.date
+            pendingBill.elecReadingDay = reading.electricityDay
+            pendingBill.elecReadingNight = reading.electricityNight
+            pendingBill.gasReading = reading.gas
+            readingRepository.save(pendingBill)
         } else {
-            val pendingBill = readingRepository.getLastBillByCustomerId(id, "pending")
-            if (pendingBill != null) {
-                readingRepository.delete(pendingBill)
-            }
             readingRepository.save(reading.toReading(id))
         }
     }

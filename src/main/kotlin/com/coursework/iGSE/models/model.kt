@@ -60,7 +60,6 @@ data class NewReading(
 
 fun NewReading.toReading(id: String): Reading {
     return Reading(
-        readingId = 1,
         customerId = id,
         submissionDate = this.date,
         elecReadingDay = this.electricityDay,
