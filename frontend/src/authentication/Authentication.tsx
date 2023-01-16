@@ -23,7 +23,7 @@ export class Authentication extends React.Component<any, AuthProps> {
     render() {
         return (
             <div className="canvas">
-                <div className="logo">Shangri-la</div>
+                <div className="logoName">Shangri-la Utility Management</div>
                 <div className="authentication">
                     <div className="toggle">
                         <button className={this.state.selection === choice.login ? "selected" : ""}

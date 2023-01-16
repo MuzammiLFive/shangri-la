@@ -51,6 +51,7 @@ export class PayBill extends React.Component<any, Iprops> {
     checkVoucher() {
         const code = (document.getElementById("code") as unknown as HTMLInputElement).value;
         if (code == "") {
+            this.setState({validVoucher: undefined});
             return;
         }
         get("/api/check-voucher/" + code)
@@ -79,9 +80,9 @@ export class PayBill extends React.Component<any, Iprops> {
             .then(res => {
                 if (res?.ok) {
                     alert("Payment Complete");
-                    this.setState({bill: undefined, balance: this.state.balance!! - 200});
+                    this.setState({bill: undefined, balance: this.state.bill?.total!! - 200});
                 }
-            })
+            });
     }
 
     topup() {
@@ -92,8 +93,18 @@ export class PayBill extends React.Component<any, Iprops> {
                     if (res?.ok) {
                         alert("Topup Complete");
                     }
-                    this.setState({balance: this.state.balance!! + 200.0, validVoucher: false})
+                    this.setState({balance: this.state.balance!! + 200.0, validVoucher: false});
                 })
+        }
+    }
+
+    getInvalidIcon() {
+        if (this.state === null || this.state?.validVoucher === undefined) {
+            return "";
+        } else {
+            return <div className="cross">
+                &#10060;
+            </div>;
         }
     }
 
@@ -124,7 +135,7 @@ export class PayBill extends React.Component<any, Iprops> {
     <div className="checkmark_circle"></div>
     <div className="checkmark_stem"></div>
     <div className="checkmark_kick"></div>
-</span> : ""}
+</span> : this.getInvalidIcon()}
                             </div>
                             <div className="topupButton">
                                 <button onClick={() => this.topup()}>Top-up</button>

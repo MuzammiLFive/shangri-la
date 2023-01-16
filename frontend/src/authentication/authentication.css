@@ -10,6 +10,12 @@
     padding: 10px;
 }
 
+.logoName {
+    padding: 30px;
+    font-size: 36px;
+    font-family: Cambria;
+}
+
 button {
     width: 200px;
     height: 30px;
